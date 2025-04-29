@@ -21,7 +21,7 @@ spec:
             - containerPort: 8080 # Default Spring Boot port, or your configured port.
           env: #Pass database connection properties
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://mysql-service:3306/tododb #replace yourdatabase
+              value: jdbc:mysql://mysql-service:3306/mydb #replace yourdatabase
             - name: SPRING_DATASOURCE_USERNAME
               value: root #replace
             - name: SPRING_DATASOURCE_PASSWORD
