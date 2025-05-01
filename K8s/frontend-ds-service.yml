@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: 17rj/three-tier-todo-frontend:latest
+          image: 17rj/three-tier-todo-frontend:1
           ports:
             - containerPort: 3000 # Default React port
           env:
