@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops-three-tier-cd
+  namespace: argocd
+  annotations:
+    # Image updater annotations
+    argocd-image-updater.argoproj.io/image-list: myfrontend=17rj/three-tier-todo-frontend,mybackend=17rj/three-tier-todo-backend
+    argocd-image-updater.argoproj.io/myfrontend.update-strategy: latest
+    argocd-image-updater.argoproj.io/mybackend.update-strategy: latest
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-token-secret
+    argocd-image-updater.argoproj.io/git-branch: main
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/17J/Three-Tier-Todo-App-CD.git
+    targetRevision: main
+    path: .
+    # ⬇️ YE LINE ADD KARO
+    kustomize: {}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: threetierapp
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
